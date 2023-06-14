@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "301881152319",
+    "project_id": "shared-notes-dev",
+    "storage_bucket": "shared-notes-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:301881152319:android:9484b701d20e375197b98a",
+        "android_client_info": {
+          "package_name": "com.ortexsoft.shared_notes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "301881152319-cv77gbj2jnmgjk7qoirgivj13h21n276.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAT1iIxNyT58hT5l1f7up7wUg7L1PO0g3I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "301881152319-cv77gbj2jnmgjk7qoirgivj13h21n276.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "301881152319-t083c1hbbnh5le921eldqteho13abkd4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ortexsoft.sharedNotes"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
