@@ -10,10 +10,12 @@ environment:
 
 dependencies:
   firebase_core: ^2.9.0
+  firebase_auth: ^4.2.2
+  google_sign_in: ^6.1.0
   cloud_firestore: ^4.5.0
-  intl: ^0.17.0
-  firebase_storage: ^11.1.0
   firebase_messaging: ^14.4.0
+  firebase_storage: ^11.1.0
+  intl: ^0.17.0
   uuid: ^3.0.6
   flutter_local_notifications: ^14.0.0-dev.2
 

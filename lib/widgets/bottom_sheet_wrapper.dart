@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
+
+const double _kTopRadius = 26.0;
+const Color _kBGColor = Colors.white;
 
 class BottomSheetWrapper extends StatelessWidget {
   const BottomSheetWrapper({
@@ -11,17 +15,25 @@ class BottomSheetWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).pop(),
+      onTap: () => Get.back(),
       child: DraggableScrollableSheet(
         initialChildSize: 0.65,
         builder: (context, controller) {
           return Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(25.0),
-                topRight: Radius.circular(25.0),
+            decoration: BoxDecoration(
+              color: _kBGColor,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(_kTopRadius),
+                topRight: Radius.circular(_kTopRadius),
               ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.6),
+                  spreadRadius: 5,
+                  blurRadius: 20,
+                  offset: const Offset(0, 3),
+                )
+              ],
             ),
             child: Column(
               children: [

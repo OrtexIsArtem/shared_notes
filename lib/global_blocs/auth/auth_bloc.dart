@@ -23,7 +23,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthUserChangedEvent>(_onUserChanged);
     on<AuthSignInWithGoogleEvent>(_onSignInWithGoogle);
     _userStream = _authRepository.user.listen(
-          (user) => add(AuthUserChangedEvent(user)),
+          (user) {
+            add(AuthUserChangedEvent(user));
+          },
     );
   }
 
