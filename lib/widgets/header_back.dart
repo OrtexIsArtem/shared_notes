@@ -6,7 +6,6 @@ class HeaderBack extends StatelessWidget {
   final void Function()? onRightButtonPressed;
   final Widget? leftIcon;
   final Widget? rightIcon;
-  final String? rightButtonText;
   final String? topText;
 
   const HeaderBack({
@@ -15,7 +14,6 @@ class HeaderBack extends StatelessWidget {
     this.onRightButtonPressed,
     this.leftIcon,
     this.rightIcon,
-    this.rightButtonText,
     this.topText,
   }) : super(key: key);
 
@@ -47,16 +45,13 @@ class HeaderBack extends StatelessWidget {
               topText!,
               style: textTheme.bodyMedium!.copyWith(fontSize: 16),
             ),
-          onRightButtonPressed != null && rightButtonText != null
+          onRightButtonPressed != null && rightIcon != null
               ? Expanded(
                   child: TextButton(
                     onPressed: onRightButtonPressed,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text(
-                          rightButtonText!,
-                        ),
                         const SizedBox(width: 5),
                         if (rightIcon != null) rightIcon!,
                       ],

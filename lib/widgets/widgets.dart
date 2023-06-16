@@ -4,3 +4,6 @@ export 'empty_content.dart';
 export 'bottom_sheet_wrapper.dart';
 export 'border_button.dart';
 export 'main_button.dart';
+export 'notes_card.dart';
+export 'main_header.dart';
+export 'app_bottom_bar.dart';

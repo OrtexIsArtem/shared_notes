@@ -22,6 +22,7 @@ dependencies:
   firebase_storage: ^11.1.0
   google_fonts: ^4.0.3
   get: ^4.6.5
+  curved_labeled_navigation_bar: ^2.0.2
   utils:
     path: packages/utils
   firestore_repository:
