@@ -20,6 +20,13 @@ class FirestoreRepository {
     await reference.set(data);
   }
 
+  Future<QuerySnapshot<Map<String, dynamic>>> getData({
+    required String path,
+  }) async {
+    final reference = firestore.collection(path);
+    return await reference.get();
+  }
+
   Future<void> updateData({
     required String path,
     required Map<String, dynamic> data,

@@ -15,7 +15,7 @@ class BackLayout extends StatelessWidget {
   final EdgeInsets? padding;
 
   const BackLayout({
-    Key? key,
+    super.key,
     required this.child,
     this.onRightButtonPressed,
     this.leftIcon,
@@ -24,7 +24,7 @@ class BackLayout extends StatelessWidget {
     this.isEmptyData = false,
     this.emptyDataText,
     this.padding,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:notes_repository/notes_repository.dart';
 import 'package:shared_notes/layouts/back_layout.dart';
 import 'package:shared_notes/widgets/main_header.dart';
 
 class NotesDetails extends StatelessWidget {
-  const NotesDetails({super.key});
+  const NotesDetails({
+    super.key,
+    required this.note,
+  });
 
-  static Future<void> to() async {
+  final NoteModel note;
+
+  static Future<void> to({required note}) async {
     Get.to(
-      () => const NotesDetails(),
+      () => NotesDetails(note: note),
     );
   }
 
@@ -16,12 +22,21 @@ class NotesDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return BackLayout(
       topText: 'Notes Name',
-      rightIcon: const Icon(Icons.settings, color: Colors.black,),
-      onRightButtonPressed: () {
-      },
+      rightIcon: const Icon(
+        Icons.settings,
+        color: Colors.black,
+      ),
+      onRightButtonPressed: () {},
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const MainHeader('Note description'),
+              Text(note.description),
+            ],
+          ),
           const MainHeader('Notes tasks'),
           Expanded(
             child: ListView.builder(
@@ -32,8 +47,7 @@ class NotesDetails extends StatelessWidget {
                     'task',
                   ),
                   value: false,
-                  onChanged: (newValue) {
-                  },
+                  onChanged: (newValue) {},
                   controlAffinity: ListTileControlAffinity.leading,
                 );
               },

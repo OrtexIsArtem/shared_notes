@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:notes_repository/notes_repository.dart';
 import 'package:shared_notes/theme/theme.dart';
 
 const double _kCardRadius = 24.0;
@@ -9,14 +10,15 @@ class NotesCard extends StatelessWidget {
     super.key,
     required this.onPress,
     required this.onSwitch,
+    required this.note,
   });
 
   final VoidCallback onPress;
   final void Function(bool) onSwitch;
+  final NoteModel note;
 
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Container(
@@ -44,28 +46,40 @@ class NotesCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(
-                            child: Text(
-                              'Notes name',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(
-                                fontSize: 20,
-                              ),
-                            ),
+                          Text(
+                            note.title,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                  fontSize: 20,
+                                ),
                           ),
-                          const SizedBox(width: 10),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: CupertinoSwitch(
-                              value: false,
-                              onChanged: onSwitch,
-                            ),
+                          CupertinoSwitch(
+                            value: false,
+                            onChanged: onSwitch,
                           ),
                         ],
                       ),
+                      const SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Text(
+                            'Priority:',
+                            style:
+                                Theme.of(context).textTheme.bodySmall!.copyWith(
+                                      color: AppColors.grayText,
+                                    ),
+                          ),
+                          const SizedBox(width: 10),
+                          Text(
+                            'Low',
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ),
@@ -76,7 +90,7 @@ class NotesCard extends StatelessWidget {
                 const ListTile(
                   horizontalTitleGap: 0,
                   title: Text(
-                   'Edit',
+                    'Edit',
                     style: TextStyle(
                       color: Color.fromRGBO(120, 116, 163, 1),
                       fontWeight: FontWeight.w500,

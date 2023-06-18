@@ -27,6 +27,8 @@ dependencies:
     path: packages/utils
   firestore_repository:
     path: packages/firestore_repository
+  notes_repository:
+    path: packages/notes_repository
   auth_repository:
     path: packages/auth_repository
 

@@ -7,3 +7,5 @@ export 'main_button.dart';
 export 'notes_card.dart';
 export 'main_header.dart';
 export 'app_bottom_bar.dart';
+export 'main_input.dart';
+export 'main_text_area.dart';

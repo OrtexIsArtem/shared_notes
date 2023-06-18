@@ -1,10 +1,9 @@
-import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
-import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_notes/constant/constant.dart';
 import 'package:shared_notes/layouts/layouts.dart';
+import 'package:shared_notes/screens/notes/create_note_screen.dart';
+import 'package:shared_notes/screens/notes/notes.dart';
 import 'package:shared_notes/screens/notes_details.dart';
-import 'package:shared_notes/theme/theme.dart';
 import 'package:shared_notes/widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -38,28 +37,19 @@ class _HomeScreenState extends State<HomeScreen> {
         controller: _pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          MainLayout(
-            children: [
-              const MainHeader('My Notes'),
-              const SizedBox(height: 20),
-              NotesCard(
-                onPress: () {
-                  NotesDetails.to();
-                },
-                onSwitch: (val) {},
-              ),
-            ],
-          ),
+          const MyNotesScreen(),
           MainLayout(
             children: [
               const MainHeader('Group Notes'),
               const SizedBox(height: 20),
-              NotesCard(
-                onPress: () {
-                  NotesDetails.to();
-                },
-                onSwitch: (val) {},
-              ),
+
+            ],
+          ),
+          const CreateNoteScreen(),
+          const MainLayout(
+            children: [
+              MainHeader('Profile'),
+              SizedBox(height: 20),
             ],
           ),
         ],
