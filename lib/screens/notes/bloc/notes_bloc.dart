@@ -16,10 +16,10 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
     on<NotesCreateNoteEvent>(_onCreateNote);
     on<NotesChangeTitleEvent>(_onChangeTitle);
     on<NotesChangDescriptionEvent>(_onChaneDescription);
-    _notesStream =
-        _notesRepository.notesStream().listen((notesList) {
-          add(NotesChangeNotesEvent(notesList));
-        });
+    on<NotesChangPriorityEvent>(_onChanePriority);
+    _notesStream = _notesRepository.notesStream().listen((notesList) {
+      add(NotesChangeNotesEvent(notesList));
+    });
   }
 
   final NotesRepository _notesRepository;
@@ -55,6 +55,13 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
     Emitter<NotesState> emit,
   ) {
     emit(state.copyWith(description: event.value));
+  }
+
+  void _onChanePriority(
+    NotesChangPriorityEvent event,
+    Emitter<NotesState> emit,
+  ) {
+    emit(state.copyWith(priority: event.value));
   }
 
   @override

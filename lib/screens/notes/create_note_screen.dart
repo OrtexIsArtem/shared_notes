@@ -1,8 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/route_manager.dart';
 import 'package:shared_notes/constant/common.dart';
 import 'package:shared_notes/layouts/layouts.dart';
+import 'package:shared_notes/screens/notes/add_task_screen.dart';
 import 'package:shared_notes/screens/notes/bloc/notes_bloc.dart';
+import 'package:shared_notes/screens/notes/widgets/widgets.dart';
 import 'package:shared_notes/widgets/widgets.dart';
 
 class CreateNoteScreen extends StatefulWidget {
@@ -14,7 +18,6 @@ class CreateNoteScreen extends StatefulWidget {
 
 class _CreateNoteScreenState extends State<CreateNoteScreen> {
   final _formKey = GlobalKey<FormState>();
-
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +33,24 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
             key: _formKey,
             child: Column(
               children: [
-                MainInput(
-                  labelText: 'Title',
-                  initialValue: state.title,
-                  onChanged: (value) {
-                    bloc.add(NotesChangeTitleEvent(value));
-                  },
+                Row(
+                  children: [
+                    Expanded(
+                      child: MainInput(
+                        labelText: 'Title',
+                        initialValue: state.title,
+                        onChanged: (value) {
+                          bloc.add(NotesChangeTitleEvent(value));
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    PriorityButton(
+                      onConfirm: (priority) {
+                        bloc.add(NotesChangPriorityEvent(priority));
+                      },
+                    ),
+                  ],
                 ),
                 const SizedBox(height: kBottomMargin),
                 MainTextArea(
@@ -44,6 +59,16 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
                   onChanged: (value) {
                     bloc.add(NotesChangDescriptionEvent(value));
                   },
+                ),
+                Row(
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Get.to(AddTaskScreen());
+                      },
+                      child: const Text('Add task'),
+                    ),
+                  ],
                 ),
                 const Spacer(),
                 MainButton(

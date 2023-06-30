@@ -23,3 +23,9 @@ class NotesChangDescriptionEvent extends NotesEvent {
 
   final String value;
 }
+
+class NotesChangPriorityEvent extends NotesEvent {
+  const NotesChangPriorityEvent(this.value);
+
+  final PriorityModel value;
+}

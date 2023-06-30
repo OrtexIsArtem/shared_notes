@@ -8,5 +8,16 @@ enum PriorityModel {
 
  final int value;
 
+ String get name {
+  return toString().split('.').last;
+ }
+
+ static PriorityModel? getByIndex(int index) {
+  const values = PriorityModel.values;
+  if (index >= 0 && index < values.length) {
+   return values[index];
+  }
+  return null;
+ }
 
 }

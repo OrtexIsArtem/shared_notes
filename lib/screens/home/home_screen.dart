@@ -36,17 +36,16 @@ class _HomeScreenState extends State<HomeScreen> {
       body: PageView(
         controller: _pageController,
         physics: const NeverScrollableScrollPhysics(),
-        children: [
-          const MyNotesScreen(),
+        children: const [
+          MyNotesScreen(),
           MainLayout(
             children: [
-              const MainHeader('Group Notes'),
-              const SizedBox(height: 20),
-
+              MainHeader('Group Notes'),
+              SizedBox(height: 20),
             ],
           ),
-          const CreateNoteScreen(),
-          const MainLayout(
+          CreateNoteScreen(),
+          MainLayout(
             children: [
               MainHeader('Profile'),
               SizedBox(height: 20),

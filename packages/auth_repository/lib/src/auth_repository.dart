@@ -4,14 +4,15 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'models/models.dart';
 
 class AuthRepository {
-  AuthRepository({
-    firebase_auth.FirebaseAuth? firebaseAuth,
-    GoogleSignIn? googleSignIn,
-  })  : _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance,
-        _googleSignIn = googleSignIn ?? GoogleSignIn.standard();
+  static final AuthRepository _instance = AuthRepository._internal();
 
-  final firebase_auth.FirebaseAuth _firebaseAuth;
-  final GoogleSignIn _googleSignIn;
+  factory AuthRepository() => _instance;
+
+  AuthRepository._internal();
+
+  final firebase_auth.FirebaseAuth _firebaseAuth =
+      firebase_auth.FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn.standard();
 
   User currentUser = User.empty;
 
