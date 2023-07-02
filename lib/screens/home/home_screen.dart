@@ -3,7 +3,6 @@ import 'package:shared_notes/constant/constant.dart';
 import 'package:shared_notes/layouts/layouts.dart';
 import 'package:shared_notes/screens/notes/create_note_screen.dart';
 import 'package:shared_notes/screens/notes/notes.dart';
-import 'package:shared_notes/screens/notes_details.dart';
 import 'package:shared_notes/widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {

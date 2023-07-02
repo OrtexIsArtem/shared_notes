@@ -6,16 +6,18 @@ class HeaderBack extends StatelessWidget {
   final void Function()? onRightButtonPressed;
   final Widget? leftIcon;
   final Widget? rightIcon;
+  final String? rightButtonText;
   final String? topText;
 
   const HeaderBack({
-    Key? key,
+    super.key,
     required this.onLeftButtonPressed,
     this.onRightButtonPressed,
     this.leftIcon,
     this.rightIcon,
+    this.rightButtonText,
     this.topText,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +35,8 @@ class HeaderBack extends StatelessWidget {
                 splashRadius: 22,
                 onPressed: onLeftButtonPressed,
                 icon: leftIcon ??
-                    const Icon(
-                      Icons.arrow_back_ios_rounded,
-                      color: AppColors.primaryText,
-                    ),
+                    const Icon(Icons.arrow_back_ios_rounded,
+                        color: AppColors.primaryText),
               ),
             ),
           ),
@@ -45,19 +45,24 @@ class HeaderBack extends StatelessWidget {
               topText!,
               style: textTheme.bodyMedium!.copyWith(fontSize: 16),
             ),
-          onRightButtonPressed != null && rightIcon != null
+          onRightButtonPressed != null
               ? Expanded(
-                  child: TextButton(
-                    onPressed: onRightButtonPressed,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        const SizedBox(width: 5),
-                        if (rightIcon != null) rightIcon!,
-                      ],
-                    ),
-                  ),
-                )
+            child: TextButton(
+              onPressed: onRightButtonPressed,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  rightButtonText != null
+                      ? Text(
+                    rightButtonText!,
+                  )
+                      : const SizedBox(),
+                  const SizedBox(width: 5),
+                  if (rightIcon != null) rightIcon!,
+                ],
+              ),
+            ),
+          )
               : const Expanded(child: SizedBox()),
         ],
       ),

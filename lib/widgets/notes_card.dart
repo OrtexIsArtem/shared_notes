@@ -19,6 +19,7 @@ class NotesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Container(
@@ -50,8 +51,7 @@ class NotesCard extends StatelessWidget {
                         children: [
                           Text(
                             note.title,
-                            style: Theme.of(context)
-                                .textTheme
+                            style: textTheme
                                 .bodyMedium!
                                 .copyWith(
                                   fontSize: 20,
@@ -69,14 +69,14 @@ class NotesCard extends StatelessWidget {
                           Text(
                             'Priority:',
                             style:
-                                Theme.of(context).textTheme.bodySmall!.copyWith(
+                            textTheme.bodySmall!.copyWith(
                                       color: AppColors.grayText,
                                     ),
                           ),
                           const SizedBox(width: 10),
                           Text(
-                            'Low',
-                            style: Theme.of(context).textTheme.bodySmall,
+                            PriorityModel.getName(note.priority),
+                            style: textTheme.bodySmall,
                           ),
                         ],
                       )

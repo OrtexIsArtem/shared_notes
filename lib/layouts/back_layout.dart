@@ -9,22 +9,24 @@ class BackLayout extends StatelessWidget {
   final void Function()? onRightButtonPressed;
   final Widget? leftIcon;
   final Widget? rightIcon;
+  final String? rightButtonText;
   final String? topText;
   final bool isEmptyData;
   final String? emptyDataText;
   final EdgeInsets? padding;
 
   const BackLayout({
-    super.key,
+    Key? key,
     required this.child,
     this.onRightButtonPressed,
     this.leftIcon,
     this.rightIcon,
+    this.rightButtonText,
     this.topText,
     this.isEmptyData = false,
     this.emptyDataText,
     this.padding,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +41,7 @@ class BackLayout extends StatelessWidget {
                   Get.back();
                 },
                 onRightButtonPressed: isEmptyData ? null : onRightButtonPressed,
+                rightButtonText: rightButtonText,
                 leftIcon: leftIcon,
                 rightIcon: rightIcon,
                 topText: topText,
@@ -46,17 +49,17 @@ class BackLayout extends StatelessWidget {
               Expanded(
                 child: isEmptyData
                     ? Center(
-                        child: Text(
-                          emptyDataText ?? '',
-                        ),
-                      )
+                  child: Text(
+                    emptyDataText ?? '',
+                  ),
+                )
                     : Padding(
-                        padding: padding ??
-                            const EdgeInsets.symmetric(
-                              horizontal: kHorizontalPadding,
-                            ),
-                        child: child,
+                  padding: padding ??
+                      const EdgeInsets.symmetric(
+                        horizontal: kHorizontalPadding,
                       ),
+                  child: child,
+                ),
               ),
             ],
           ),

@@ -29,3 +29,10 @@ class NotesChangPriorityEvent extends NotesEvent {
 
   final PriorityModel value;
 }
+
+
+class NotesAddTasksEvent extends NotesEvent {
+  const NotesAddTasksEvent(this.tasks);
+
+  final List<Task> tasks;
+}

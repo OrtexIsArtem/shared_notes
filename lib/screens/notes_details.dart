@@ -37,14 +37,15 @@ class NotesDetails extends StatelessWidget {
               Text(note.description),
             ],
           ),
-          const MainHeader('Notes tasks'),
+          if (note.tasks.isNotEmpty) const MainHeader('Notes tasks'),
           Expanded(
             child: ListView.builder(
+              itemCount: note.tasks.length,
               itemBuilder: (_, index) {
                 return CheckboxListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text(
-                    'task',
+                  title: Text(
+                    note.tasks[index].name,
                   ),
                   value: false,
                   onChanged: (newValue) {},

@@ -13,4 +13,15 @@ class Utils {
     return list;
   }
 
+  static String? nameValidator(String? value) {
+    final String? name = value?.trim();
+    if (name!.isEmpty) {
+      return 'Name Cannot be empty';
+    }
+    if (name.length < 2) {
+      return 'Minimum number of characters 2';
+    }
+    return null;
+  }
+
 }

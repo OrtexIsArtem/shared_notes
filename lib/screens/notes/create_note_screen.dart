@@ -1,13 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/route_manager.dart';
 import 'package:shared_notes/constant/common.dart';
 import 'package:shared_notes/layouts/layouts.dart';
-import 'package:shared_notes/screens/notes/add_task_screen.dart';
+import 'package:notes_repository/src/models/task.dart';
+import 'package:shared_notes/screens/notes/new_task/add_task_screen.dart';
 import 'package:shared_notes/screens/notes/bloc/notes_bloc.dart';
 import 'package:shared_notes/screens/notes/widgets/widgets.dart';
+import 'package:shared_notes/theme/theme.dart';
 import 'package:shared_notes/widgets/widgets.dart';
+import 'package:utils/utils.dart';
 
 class CreateNoteScreen extends StatefulWidget {
   const CreateNoteScreen({super.key});
@@ -18,6 +19,10 @@ class CreateNoteScreen extends StatefulWidget {
 
 class _CreateNoteScreenState extends State<CreateNoteScreen> {
   final _formKey = GlobalKey<FormState>();
+
+  void _onSaveTask(List<Task> tasks) {
+    context.read<NotesBloc>().add(NotesAddTasksEvent(tasks));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +37,14 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
           child: Form(
             key: _formKey,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Row(
                   children: [
                     Expanded(
                       child: MainInput(
                         labelText: 'Title',
+                        validator: Utils.nameValidator,
                         initialValue: state.title,
                         onChanged: (value) {
                           bloc.add(NotesChangeTitleEvent(value));
@@ -64,16 +71,39 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
                   children: [
                     TextButton(
                       onPressed: () {
-                        Get.to(AddTaskScreen());
+                        AddTaskScreen.to(
+                          onSave: _onSaveTask,
+                          tasks: state.tasks,
+                        );
                       },
                       child: const Text('Add task'),
                     ),
                   ],
                 ),
-                const Spacer(),
+                if (state.tasks.isNotEmpty)
+                  const Text('Tasks', textAlign: TextAlign.start),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: state.tasks.length,
+                    itemBuilder: (_, index) => Container(
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          bottom:
+                              BorderSide(color: AppColors.border, width: 1.0),
+                        ),
+                      ),
+                      child: ListTile(
+                        title: Text(state.tasks[index].name),
+                      ),
+                    ),
+                  ),
+                ),
                 MainButton(
                   title: 'Create',
                   onPressed: () {
+                    if (!_formKey.currentState!.validate()) {
+                      return;
+                    }
                     bloc.add(NotesCreateNoteEvent());
                   },
                 ),

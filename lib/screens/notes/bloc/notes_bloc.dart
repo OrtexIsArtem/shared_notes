@@ -17,6 +17,7 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
     on<NotesChangeTitleEvent>(_onChangeTitle);
     on<NotesChangDescriptionEvent>(_onChaneDescription);
     on<NotesChangPriorityEvent>(_onChanePriority);
+    on<NotesAddTasksEvent>(_onAddTasks);
     _notesStream = _notesRepository.notesStream().listen((notesList) {
       add(NotesChangeNotesEvent(notesList));
     });
@@ -36,11 +37,17 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
     NotesCreateNoteEvent event,
     Emitter<NotesState> emit,
   ) async {
-    final note = NoteModel().copyWith(
+    final note = NoteModel.create(
       title: state.title,
       description: state.description,
+      tasks: state.tasks,
     );
-    await _notesRepository.createNote(note);
+    try {
+      await _notesRepository.createNote(note);
+
+    } catch (e) {
+      print(e);
+    }
   }
 
   void _onChangeTitle(
@@ -62,6 +69,15 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
     Emitter<NotesState> emit,
   ) {
     emit(state.copyWith(priority: event.value));
+  }
+
+  void _onAddTasks(
+    NotesAddTasksEvent event,
+    Emitter<NotesState> emit,
+  ) {
+    emit(state.copyWith(
+      tasks: event.tasks,
+    ));
   }
 
   @override
