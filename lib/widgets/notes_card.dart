@@ -58,7 +58,7 @@ class NotesCard extends StatelessWidget {
                                 ),
                           ),
                           CupertinoSwitch(
-                            value: false,
+                            value: note.isCompleted,
                             onChanged: onSwitch,
                           ),
                         ],

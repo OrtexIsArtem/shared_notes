@@ -1,0 +1,19 @@
+name: settings_repository
+description: settings_repository
+
+publish_to: 'none'
+
+version: 1.0.4+1
+
+environment:
+  sdk: ">=2.19.0 <3.0.0"
+
+dependencies:
+  intl: ^0.17.0
+  uuid: ^3.0.6
+  firestore_repository:
+    path: ../firestore_repository
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
+

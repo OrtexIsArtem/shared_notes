@@ -8,38 +8,41 @@ class AppBottomBar extends StatelessWidget {
   const AppBottomBar({
     super.key,
     required this.onTap,
+    required this.currentTab,
   });
 
   final void Function(int) onTap;
+  final int currentTab;
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    final labelStyle = Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 14);
 
     return CurvedNavigationBar(
       backgroundColor: AppColors.primary,
       animationCurve: kAnimation,
-      animationDuration: kAnimationDuration,
+      animationDuration: const Duration(milliseconds: 150),
+      index: currentTab,
       items: [
         CurvedNavigationBarItem(
           child: const Icon(Icons.task),
           label: 'Personal',
-          labelStyle: textTheme.bodySmall!.copyWith(fontSize: 14),
+          labelStyle: labelStyle,
         ),
         CurvedNavigationBarItem(
           child: const Icon(Icons.assignment),
           label: 'Group',
-          labelStyle: textTheme.bodySmall!.copyWith(fontSize: 14),
+          labelStyle: labelStyle,
         ),
         CurvedNavigationBarItem(
           child: const Icon(Icons.add_box),
           label: 'Create',
-          labelStyle: textTheme.bodySmall!.copyWith(fontSize: 14),
+          labelStyle: labelStyle,
         ),
         CurvedNavigationBarItem(
           child: const Icon(Icons.account_circle),
           label: 'Settings',
-          labelStyle: textTheme.bodySmall!.copyWith(fontSize: 14),
+          labelStyle: labelStyle,
         ),
       ],
       onTap: onTap,

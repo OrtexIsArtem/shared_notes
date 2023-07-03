@@ -33,6 +33,10 @@ dependencies:
     path: packages/notes_repository
   auth_repository:
     path: packages/auth_repository
+  settings_repository:
+    path: packages/settings_repository
+  user_repository:
+    path: packages/user_repository
 
 dev_dependencies:
   flutter_test:

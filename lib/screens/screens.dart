@@ -1,3 +1,6 @@
 export 'screens_controller.dart';
-export 'onboard/onboard_screen.dart';
 export 'splash_screen.dart';
+export 'onboard/onboard.dart';
+export 'tabs/tabs.dart';
+export 'settings/settings.dart';
+export 'notes/notes.dart';

@@ -67,16 +67,19 @@ void showWheel({
 class CupertinoWheelPicker extends StatelessWidget {
   final void Function(int)? onSelectedItemChanged;
   final List<Widget> children;
+  final FixedExtentScrollController? scrollController;
 
   const CupertinoWheelPicker({
     super.key,
     required this.onSelectedItemChanged,
     required this.children,
+    this.scrollController,
   });
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPicker(
+      scrollController: scrollController,
       magnification: 1.22,
       squeeze: 1.2,
       useMagnifier: true,

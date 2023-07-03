@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/route_manager.dart';
+import 'package:notes_repository/notes_repository.dart';
 import 'package:shared_notes/constant/common.dart';
 import 'package:shared_notes/layouts/back_layout.dart';
-import 'package:notes_repository/src/models/task.dart';
-import 'package:shared_notes/screens/notes/new_task/new_task_cubit/new_task_cubit.dart';
+import 'package:shared_notes/screens/notes/new_task_cubit/new_task_cubit.dart';
 import 'package:shared_notes/theme/theme.dart';
 import 'package:shared_notes/widgets/main_button.dart';
 import 'package:shared_notes/widgets/main_input.dart';
@@ -18,8 +18,8 @@ class AddTaskScreen extends StatefulWidget {
   });
 
   static void to({
-    required void Function(List<Task>) onSave,
-    List<Task> tasks = const [],
+    required void Function(List<TaskModel>) onSave,
+    List<TaskModel> tasks = const [],
   }) {
     Get.to(
       () => BlocProvider<NewTaskCubit>(
@@ -32,8 +32,8 @@ class AddTaskScreen extends StatefulWidget {
     );
   }
 
-  final void Function(List<Task>) onSave;
-  final List<Task> tasks;
+  final void Function(List<TaskModel>) onSave;
+  final List<TaskModel> tasks;
 
   @override
   State<AddTaskScreen> createState() => _AddTaskScreenState();

@@ -1,0 +1,25 @@
+name: user_repository
+description: user_repository
+
+publish_to: 'none'
+
+version: 1.0.4+1
+
+environment:
+  sdk: ">=2.19.0 <3.0.0"
+
+dependencies:
+  intl: ^0.17.0
+  uuid: ^3.0.6
+  json_annotation: ^4.8.1
+  equatable: ^2.0.5
+  firestore_repository:
+    path: ../firestore_repository
+  auth_repository:
+    path: ../auth_repository
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
+  build_runner: ^2.2.0
+  json_serializable: ^6.3.1
+

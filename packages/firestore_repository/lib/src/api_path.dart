@@ -1,8 +1,18 @@
 class APIPath {
   const APIPath._();
 
-  static String setMyTodo({required String userId, required String docId}) =>
-      'users/$userId/myTodo/$docId';
+  // User
+  static String users() => 'users';
 
-  static String myTodos({required String userId}) => 'users/$userId/myTodo';
+  static String user(String userId) => '${users()}/$userId';
+
+  // Notes
+  static String notes() => 'notes';
+
+  static String note(String noteId) => '${notes()}/$noteId';
+
+  // Group
+  static String groups() => 'groups';
+
+  static String group(String groupId) => '${groups()}/$groupId';
 }

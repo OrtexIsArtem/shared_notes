@@ -8,9 +8,11 @@ class PriorityButton extends StatefulWidget {
   const PriorityButton({
     super.key,
     required this.onConfirm,
+    this.scrollController,
   });
 
   final void Function(PriorityModel) onConfirm;
+  final FixedExtentScrollController? scrollController;
 
   @override
   State<PriorityButton> createState() => _PriorityButtonState();
@@ -51,6 +53,7 @@ class _PriorityButtonState extends State<PriorityButton> {
             },
             child: Scaffold(
               body: CupertinoWheelPicker(
+                scrollController: widget.scrollController,
                 onSelectedItemChanged: (int index) {
                   setState(() {
                     priority = PriorityModel.getByIndex(index);

@@ -5,7 +5,7 @@ import 'package:shared_notes/constant/constant.dart';
 import 'package:shared_notes/global_blocs/auth/auth_bloc.dart';
 import 'package:shared_notes/widgets/widgets.dart';
 
-import '../../theme/theme.dart';
+import '../../../theme/theme.dart';
 
 class OnboardScreen extends StatefulWidget {
   const OnboardScreen({super.key});

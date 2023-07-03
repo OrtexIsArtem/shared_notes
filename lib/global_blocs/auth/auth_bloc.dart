@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:auth_repository/auth_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:user_repository/user_repository.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

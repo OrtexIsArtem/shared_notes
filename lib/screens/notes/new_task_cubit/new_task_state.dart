@@ -3,7 +3,7 @@ part of 'new_task_cubit.dart';
 
 
 class NewTaskState extends Equatable {
-  final List<Task> tasks;
+  final List<TaskModel> tasks;
   final String name;
 
   const NewTaskState({
@@ -12,7 +12,7 @@ class NewTaskState extends Equatable {
   });
 
   NewTaskState copyWith({
-    List<Task>? tasks,
+    List<TaskModel>? tasks,
     String? name,
   }) {
     return NewTaskState(

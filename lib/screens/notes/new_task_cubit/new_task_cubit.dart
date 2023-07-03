@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes_repository/src/models/task.dart';
+import 'package:notes_repository/notes_repository.dart';
 import 'package:uuid/uuid.dart';
 
 part 'new_task_state.dart';
@@ -15,7 +15,7 @@ class NewTaskCubit extends Cubit<NewTaskState> {
   void onAddTask(String name) => emit(state.copyWith(
         tasks: [
           ...state.tasks,
-          Task.create(
+          TaskModel.create(
             id: const Uuid().v4(),
             name: name,
           ),
@@ -23,11 +23,11 @@ class NewTaskCubit extends Cubit<NewTaskState> {
         name: '',
       ));
 
-  void onAddTasks(List<Task> tasks) => emit(state.copyWith(
+  void onAddTasks(List<TaskModel> tasks) => emit(state.copyWith(
         tasks: tasks,
       ));
 
-  void onDeleteTask(Task task) => emit(state.copyWith(
+  void onDeleteTask(TaskModel task) => emit(state.copyWith(
         tasks: [
           ...state.tasks.where((item) => task != item),
         ],

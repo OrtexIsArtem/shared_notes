@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:user_repository/user_repository.dart';
 
-import 'models/models.dart';
 
 class AuthRepository {
   static final AuthRepository _instance = AuthRepository._internal();
@@ -24,14 +24,20 @@ class AuthRepository {
     });
   }
 
-  Future<void> createUserWithEmailAndPassword({
+  Future<User> createUserWithEmailAndPassword({
     required String email,
     required String password,
+    required String name,
   }) async {
-    await _firebaseAuth.createUserWithEmailAndPassword(
+    final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
+    firebase_auth.User? user = userCredential.user;
+    if (user != null) {
+      return _firebaseAuth.currentUser!.toUser;
+    }
+    return User.empty;
   }
 
   Future<void> loginWithEmailAndPassword({
@@ -52,8 +58,14 @@ class AuthRepository {
       if (googleAuth.idToken != null) {
         final userCredential = await _firebaseAuth.signInWithCredential(
           firebase_auth.GoogleAuthProvider.credential(
-              idToken: googleAuth.idToken, accessToken: googleAuth.accessToken),
+            idToken: googleAuth.idToken,
+            accessToken: googleAuth.accessToken,
+          ),
         );
+        final isNewUser = userCredential.additionalUserInfo?.isNewUser ?? false;
+        if (isNewUser) {
+          UserRepository().onCreateUser(userCredential.user!.toUser);
+        }
         return userCredential.user!.toUser;
       }
     }

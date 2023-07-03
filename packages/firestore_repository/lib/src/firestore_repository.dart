@@ -53,18 +53,19 @@ class FirestoreRepository {
   Stream<List<T>> collectionStream<T>({
     required String path,
     required T Function(Map<String, dynamic> data, String documentId) builder,
-    Function(Query query)? queryBuilder,
+    Query Function(Query query)? queryBuilder,
     int Function(T lhs, T rhs)? sort,
   }) {
-    var query = firestore.collection(path);
+    Query query = FirebaseFirestore.instance.collection(path);
 
     if (queryBuilder != null) {
       query = queryBuilder(query);
     }
+
     final snapshots = query.snapshots();
     return snapshots.map((snapshot) {
       final result = snapshot.docs
-          .map((snapshot) => builder(snapshot.data(), snapshot.id))
+          .map((doc) => builder(doc.data() as Map<String, dynamic>, doc.id))
           .where((value) => value != null)
           .toList();
       if (sort != null) {

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_repository/notes_repository.dart';
+import 'package:uuid/uuid.dart';
 
 part 'notes_event.dart';
 
@@ -18,6 +19,8 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
     on<NotesChangDescriptionEvent>(_onChaneDescription);
     on<NotesChangPriorityEvent>(_onChanePriority);
     on<NotesAddTasksEvent>(_onAddTasks);
+    on<NotesToggleGroupTypeEvent>(_onToggleGroupType);
+    on<NotesToggleNoteStatusEvent>(_onToggleNoteStatus);
     _notesStream = _notesRepository.notesStream().listen((notesList) {
       add(NotesChangeNotesEvent(notesList));
     });
@@ -30,21 +33,52 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
     NotesChangeNotesEvent event,
     Emitter<NotesState> emit,
   ) async {
-    emit(state.copyWith(myNotes: event.notes));
+    final myNotes = event.notes.where((element) => !element.groupTask).toList();
+    final groupNotes =
+        event.notes.where((element) => element.groupTask).toList();
+    emit(state.copyWith(
+      myNotes: myNotes,
+      groupNotes: groupNotes,
+    ));
   }
 
   void _onCreateNote(
     NotesCreateNoteEvent event,
     Emitter<NotesState> emit,
   ) async {
-    final note = NoteModel.create(
+    final note = NoteModel(
       title: state.title,
       description: state.description,
       tasks: state.tasks,
+      priority: state.priority,
+      groupTask: state.groupTask,
+      groupId: state.groupTask ? const Uuid().v4() : '',
     );
     try {
       await _notesRepository.createNote(note);
+      // clear state
+      emit(NotesState(
+        myNotes: state.myNotes,
+        groupNotes: state.groupNotes,
+        status: NotesStatus.success,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: NotesStatus.failure,
+      ));
+      print(e);
+    }
+  }
 
+  void _onToggleNoteStatus(
+    NotesToggleNoteStatusEvent event,
+    Emitter<NotesState> emit,
+  ) async {
+    try {
+      await _notesRepository.updateNoteStatus(
+        noteId: event.note.id,
+        isCompleted: !event.note.isCompleted,
+      );
     } catch (e) {
       print(e);
     }
@@ -55,6 +89,13 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
     Emitter<NotesState> emit,
   ) {
     emit(state.copyWith(title: event.value));
+  }
+
+  void _onToggleGroupType(
+    NotesToggleGroupTypeEvent event,
+    Emitter<NotesState> emit,
+  ) {
+    emit(state.copyWith(groupTask: !state.groupTask));
   }
 
   void _onChaneDescription(
