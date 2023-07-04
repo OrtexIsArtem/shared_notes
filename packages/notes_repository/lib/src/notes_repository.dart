@@ -31,7 +31,7 @@ class NotesRepository {
   Stream<List<NoteModel>> notesStream() {
     return _storeService.collectionStream(
       path: APIPath.notes(),
-      builder: (data, documentId) => NoteModel.fromJson(data),
+      builder: (data) => NoteModel.fromJson(data),
       queryBuilder: (query) {
         return query.where(
           'owner',

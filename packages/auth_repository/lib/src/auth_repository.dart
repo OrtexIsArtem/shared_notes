@@ -64,7 +64,7 @@ class AuthRepository {
         );
         final isNewUser = userCredential.additionalUserInfo?.isNewUser ?? false;
         if (isNewUser) {
-          UserRepository().onCreateUser(userCredential.user!.toUser);
+          UserRepository().createUser(userCredential.user!.toUser);
         }
         return userCredential.user!.toUser;
       }

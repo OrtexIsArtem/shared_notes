@@ -52,7 +52,7 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
       tasks: state.tasks,
       priority: state.priority,
       groupTask: state.groupTask,
-      groupId: state.groupTask ? const Uuid().v4() : '',
+      // groupId: state.groupTask ? const Uuid().v4() : '',
     );
     try {
       await _notesRepository.createNote(note);

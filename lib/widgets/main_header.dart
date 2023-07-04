@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_notes/theme/theme.dart';
 
 class MainHeader extends StatelessWidget {
   const MainHeader(
@@ -21,7 +22,8 @@ class MainHeader extends StatelessWidget {
       padding: padding,
       child: Text(
         text,
-        style: textStyle ?? textTheme.bodyLarge,
+        style: textStyle ??
+            textTheme.bodyLarge?.copyWith(fontSize: AppFontSize.h1),
         textAlign: textAlign ?? TextAlign.start,
       ),
     );

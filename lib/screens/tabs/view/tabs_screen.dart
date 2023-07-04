@@ -47,7 +47,7 @@ class _TabsScreenState extends State<TabsScreen> {
           NotesScreen(isGroup: false),
           NotesScreen(isGroup: true),
           CreateNoteScreen(),
-          SettingsScreen(),
+          ProfileScreen(),
         ],
       ),
     );

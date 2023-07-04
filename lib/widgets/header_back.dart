@@ -47,22 +47,26 @@ class HeaderBack extends StatelessWidget {
             ),
           onRightButtonPressed != null
               ? Expanded(
-            child: TextButton(
-              onPressed: onRightButtonPressed,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  rightButtonText != null
-                      ? Text(
-                    rightButtonText!,
-                  )
-                      : const SizedBox(),
-                  const SizedBox(width: 5),
-                  if (rightIcon != null) rightIcon!,
-                ],
-              ),
-            ),
-          )
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: onRightButtonPressed,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          rightButtonText != null
+                              ? Text(
+                                  rightButtonText!,
+                                )
+                              : const SizedBox(),
+                          const SizedBox(width: 5),
+                          if (rightIcon != null) rightIcon!,
+                        ],
+                      ),
+                    ),
+                  ),
+                )
               : const Expanded(child: SizedBox()),
         ],
       ),

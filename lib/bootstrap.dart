@@ -9,8 +9,9 @@ import 'package:settings_repository/settings_repository.dart';
 import 'package:shared_notes/app/app.dart';
 import 'package:shared_notes/app/app_bloc_observer.dart';
 import 'package:shared_notes/global_blocs/auth/auth_bloc.dart';
-import 'package:shared_notes/global_blocs/setting_bloc/settings_bloc.dart';
+import 'package:shared_notes/global_blocs/settings_bloc/settings_bloc.dart';
 import 'package:shared_notes/screens/notes/bloc/notes_bloc.dart';
+import 'package:user_repository/user_repository.dart';
 
 
 void bootstrap() async {
@@ -27,6 +28,7 @@ void bootstrap() async {
   final FirestoreRepository firestoreRepository = FirestoreRepository();
   final NotesRepository notesRepository = NotesRepository();
   final SettingsRepository settingsRepository = SettingsRepository();
+  final UserRepository userRepository = UserRepository();
 
 
   Bloc.observer = AppBlocObserver();
@@ -46,6 +48,9 @@ void bootstrap() async {
         RepositoryProvider.value(
           value: settingsRepository,
         ),
+        RepositoryProvider.value(
+          value: userRepository,
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -61,7 +66,7 @@ void bootstrap() async {
           ),
           BlocProvider<SettingsBloc>(
             create: (context) => SettingsBloc(
-              settingsRepository: settingsRepository,
+              userRepository: userRepository,
             ),
           ),
         ],

@@ -6,6 +6,7 @@ class AppTheme {
   const AppTheme();
 
   static ThemeData lightTheme = ThemeData(
+    useMaterial3: true,
     brightness: Brightness.light,
     cardTheme: const CardTheme(color: Colors.white),
     textTheme: TextTheme(
@@ -20,26 +21,26 @@ class AppTheme {
 
 final kBodyLarge = GoogleFonts.inter(
   color: AppColors.primaryText,
-  fontSize: AppFontSize.h1,
+  fontSize: AppFontSize.h3,
   fontWeight: FontWeight.w700,
 );
 
 final kBodyMedium = GoogleFonts.lato(
   color: AppColors.primaryText,
-  fontSize: AppFontSize.h3,
+  fontSize: AppFontSize.h4,
   fontWeight: FontWeight.w700,
 );
 
 final kBodySmall = GoogleFonts.lato(
   color: AppColors.primaryText,
-  fontSize: AppFontSize.h4,
+  fontSize: AppFontSize.h5,
   fontWeight: FontWeight.w700,
 );
 
 class AppFontSize {
   const AppFontSize._();
 
-  static const double h1 = 26;
+  static const double h1 = 22;
   static const double h2 = 20;
   static const double h3 = 18;
   static const double h4 = 16;

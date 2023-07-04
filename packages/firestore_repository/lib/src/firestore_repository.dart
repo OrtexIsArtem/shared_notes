@@ -14,10 +14,11 @@ class FirestoreRepository {
   Future<void> setData({
     required String path,
     required Map<String, dynamic> data,
+    bool? merge,
   }) async {
     final reference = firestore.doc(path);
     developer.log('$path: $data');
-    await reference.set(data);
+    await reference.set(data, SetOptions(merge: merge ?? false));
   }
 
   Future<QuerySnapshot<Map<String, dynamic>>> getData({
@@ -52,7 +53,7 @@ class FirestoreRepository {
 
   Stream<List<T>> collectionStream<T>({
     required String path,
-    required T Function(Map<String, dynamic> data, String documentId) builder,
+    required T Function(Map<String, dynamic> data) builder,
     Query Function(Query query)? queryBuilder,
     int Function(T lhs, T rhs)? sort,
   }) {
@@ -65,7 +66,7 @@ class FirestoreRepository {
     final snapshots = query.snapshots();
     return snapshots.map((snapshot) {
       final result = snapshot.docs
-          .map((doc) => builder(doc.data() as Map<String, dynamic>, doc.id))
+          .map((doc) => builder(doc.data() as Map<String, dynamic>))
           .where((value) => value != null)
           .toList();
       if (sort != null) {
